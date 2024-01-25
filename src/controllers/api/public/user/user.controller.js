@@ -1,6 +1,6 @@
 require('module-alias/register')
 const response = require('@helpers/http/response')
-const UserService = require('@services/user/user.service')
+const UserService = require('@services/public/user.service')
 
 const checkUsername = async (req, res) => {
   try {

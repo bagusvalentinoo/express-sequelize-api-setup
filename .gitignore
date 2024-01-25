@@ -9,6 +9,9 @@ node_modules
 /src/config/*
 !/src/config/database.js
 
+# Public Local Storage
+/src/public/*
+
 # Local env files
 .env
 .env.*

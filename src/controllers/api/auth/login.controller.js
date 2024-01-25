@@ -15,7 +15,7 @@ const login = async (req, res) => {
       refreshToken,
       t
     )
-    await LoginService.updateLastLogin(user, t)
+    await LoginService.updateLastActive(user, t)
     await t.commit()
 
     return response.success(
