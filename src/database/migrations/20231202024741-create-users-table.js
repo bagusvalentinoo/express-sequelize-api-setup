@@ -26,16 +26,7 @@ module.exports = {
         type: Sequelize.DataTypes.STRING(255),
         allowNull: false
       },
-      is_email_verified: {
-        type: Sequelize.DataTypes.BOOLEAN,
-        allowNull: false,
-        defaultValue: false
-      },
-      email_verified_at: {
-        type: Sequelize.DataTypes.DATE,
-        allowNull: true
-      },
-      last_login: {
+      last_active: {
         type: Sequelize.DataTypes.DATE,
         allowNull: true
       },

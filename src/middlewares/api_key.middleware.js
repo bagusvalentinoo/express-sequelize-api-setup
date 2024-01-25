@@ -12,12 +12,13 @@ const validateApiKey = async (req, res, next) => {
       where: {
         [Op.and]: [
           { api_key: apiKey },
-          { status: 'Active' }
+          { status: 'Active' },
+          { expired_at: { [Op.gte]: new Date() } }
         ]
       }
     })
 
-    if (!isApiKeyExists) response.throwNewError(401, 'Oops! ApiKey is invalid')
+    if (!isApiKeyExists) response.throwNewError(400, 'Oops! ApiKey is invalid')
 
     next()
   } catch (error) {

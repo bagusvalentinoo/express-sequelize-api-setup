@@ -109,24 +109,7 @@ module.exports = (sequelize) => {
           }
         }
       },
-      is_email_verified: {
-        type: DataTypes.BOOLEAN,
-        allowNull: false,
-        defaultValue: false,
-        validate: {
-          notNull: {
-            msg: 'Oops! Email verification status cannot be empty'
-          },
-          notEmpty: {
-            msg: 'Oops! Email verification status cannot be empty'
-          }
-        }
-      },
-      email_verified_at: {
-        type: DataTypes.DATE,
-        allowNull: true
-      },
-      last_login: {
+      last_active: {
         type: DataTypes.DATE,
         allowNull: true
       },

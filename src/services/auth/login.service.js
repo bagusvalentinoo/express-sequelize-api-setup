@@ -7,7 +7,10 @@ const { Op, User } = require('@models')
 require('dotenv').config()
 
 const checkLoginCredentials = async (req) => {
-  const { username } = req.body
+  const { username, password } = req.body
+
+  if (!username || !password)
+    response.throwNewError(400, 'Oops! Please fill in all required fields')
 
   const user = await User.findOne({
     where: {
@@ -19,9 +22,9 @@ const checkLoginCredentials = async (req) => {
   })
 
   if (!user)
-    response.throwNewError(400, 'Oops! Username, Email, or Phone Number and Password didn\'t match')
-  if (!bcrypt.compareSync(req.body.password, user.password))
-    response.throwNewError(400, 'Oops! Username, Email, or Phone Number and Password didn\'t match')
+    response.throwNewError(400, 'Oops! Username or Email and Password didn\'t match')
+  if (!bcrypt.compareSync(password, user.password))
+    response.throwNewError(400, 'Oops! Username or Email and Password didn\'t match')
 
   return user
 }
@@ -55,8 +58,8 @@ const insertAccessTokenAndRefreshToken = async (user, accessToken, refreshToken,
   }, { transaction: t })
 }
 
-const updateLastLogin = async (user, t) => {
-  return await user.update({ last_login: new Date() }, { transaction: t })
+const updateLastActive = async (user, t) => {
+  return await user.update({ last_active: new Date() }, { transaction: t })
 }
 
 module.exports = {
@@ -64,5 +67,5 @@ module.exports = {
   generateAccessToken,
   generateRefreshToken,
   insertAccessTokenAndRefreshToken,
-  updateLastLogin
+  updateLastActive
 }
